@@ -1,7 +1,7 @@
 # 🛡️ AI-Assisted DevOps: VM Health Check & Automation
 
 This project demonstrates a practical **AI-assisted DevOps use case** that checks the **health of a Virtual Machine** (VM) by monitoring critical metrics like CPU, Memory, and Disk usage. It includes:
-
+- 🤖 Used Github Copilot Workspace to generate the initial `vm_health_check.sh` Bash script from a natural language prompt
 - ✅ A Bash script with CLI argument support
 - 🐳 Dockerization of the script
 - ⏱️ Cron job for automated periodic health checks
@@ -54,7 +54,7 @@ vm-health-check/
 ### 1️⃣ Clone the repository
 
 ```bash
-git clone https://github.com/your-username/vm-health-check.git
+git clone https://github.com/your-username/ai-assisted-devops-vm-health-check.git
 cd vm-health-check
 chmod +x vm_health_check.sh
 
@@ -83,12 +83,12 @@ chmod +x vm_health_check.sh
 
 
 ```bash
-docker build -t vm-health-check .
+docker build -t vm_health_check .
 ```
 
 ▶️ Run the container
 ```bash
-docker run --rm vm-health-check
+docker run --rm vm_health_check
 ```
 ![App Screenshot](./vm_health_check_docker_1.png)
 
@@ -115,7 +115,7 @@ sudo systemctl enable docker
 sudo usermod -aG docker $USER
 
 ```
-Log out and back in or run newgrp docker.
+Log out and back in or run `newgrp docker`.
 
 ### Set Up Cron Job (Automation)
 1. Open crontab:
