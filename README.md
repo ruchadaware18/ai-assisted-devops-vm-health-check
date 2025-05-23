@@ -93,7 +93,7 @@ docker run --rm vm_health_check
 ![App Screenshot](./vm_health_check_docker_1.png)
 
 ```bash
-docker run --rm vm-health-check explain
+docker run --rm vm_health_check explain
 ```
 ![App Screenshot](./vm_health_check_docker_2.png)
 
