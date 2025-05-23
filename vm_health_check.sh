@@ -5,9 +5,8 @@ THRESHOLD=60
 
 # Function to get CPU utilization percentage (average over 1 minute)
 get_cpu_usage() {
-    # Use top to get the idle percentage, then calculate usage
-    CPU_IDLE=$(top -bn1 | grep "Cpu(s)" | awk '{print $8}' | cut -d. -f1)
-    CPU_USAGE=$((100 - CPU_IDLE))
+    CPU_IDLE=$(top -bn1 | grep "Cpu(s)" | awk -F',' '{print $4}' | awk '{print $1}' | sed 's/[^0-9.]//g')
+    CPU_USAGE=$(awk "BEGIN {printf \"%.0f\", 100 - $CPU_IDLE}")
     echo "$CPU_USAGE"
 }
 
@@ -15,13 +14,17 @@ get_cpu_usage() {
 get_mem_usage() {
     MEM_TOTAL=$(free -m | awk '/^Mem:/ {print $2}')
     MEM_USED=$(free -m | awk '/^Mem:/ {print $3}')
-    MEM_USAGE=$(awk "BEGIN {printf \"%.0f\", ($MEM_USED/$MEM_TOTAL)*100}")
-    echo "$MEM_USAGE"
+    if [ -n "$MEM_TOTAL" ] && [ -n "$MEM_USED" ]; then
+        MEM_USAGE=$(awk "BEGIN {printf \"%.0f\", ($MEM_USED/$MEM_TOTAL)*100}")
+        echo "$MEM_USAGE"
+    else
+        echo "0"
+    fi
 }
 
 # Function to get disk utilization percentage for root (/)
 get_disk_usage() {
-    DISK_USAGE=$(df / | awk 'NR==2 {print $5}' | tr -d '%')
+    DISK_USAGE=$(df / | awk 'NR==2 {gsub(/%/, "", $5); print $5}')
     echo "$DISK_USAGE"
 }
 
