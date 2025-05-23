@@ -89,8 +89,14 @@ docker build -t vm-health-check .
 ▶️ Run the container
 ```bash
 docker run --rm vm-health-check
+```
+![App Screenshot](./vm_health_check_docker_1.png)
+
+```bash
 docker run --rm vm-health-check explain
 ```
+![App Screenshot](./vm_health_check_docker_2.png)
+
 
 ### 4️⃣ Deploy on AWS EC2 (Ubuntu Free Tier)
 #### Create EC2 Instance (Ubuntu)
@@ -124,6 +130,11 @@ crontab -e
 ```bash
 sudo systemctl start cron
 ```
+4. Checking the log file:
+```bash
+tail -f health_log.txt
+```
+![App Screenshot](./vm_health_check_cron.png)
 
 ### 📈 Future Enhancements
 1. Email or Slack alert integration when VM is not healthy
